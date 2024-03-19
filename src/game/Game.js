@@ -24,7 +24,7 @@ export default function Game() {
         <ImageButton
           handler={handleAddTaste}
           taste={taste}
-          srcLink={"/vercel.svg"}
+          srcLink={"/logo.png"}
         />
       </div>
     </div>
