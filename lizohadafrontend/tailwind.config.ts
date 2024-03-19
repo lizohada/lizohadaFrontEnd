@@ -13,6 +13,9 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        "red-wine": "#7b1113", // 레드와인 색상 추가
+      },
     },
   },
   plugins: [],

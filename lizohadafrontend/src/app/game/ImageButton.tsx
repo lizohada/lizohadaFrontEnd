@@ -1,7 +1,8 @@
+import { ImageProps } from "@/app/game/Interfaces";
 import Image from "next/image";
-import Link from "next/link";
 
-export default function Home() {
+export default function ImageButton(props: ImageProps) {
+  const { handler, taste, srcLink } = props;
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="max-width: 24rem;">
@@ -13,12 +14,12 @@ export default function Home() {
           height={300}
         />
       </div>
-      <Link
-        href="/game"
-        className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+      <div
+        className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer"
+        onClick={() => handler(taste)}
       >
         시작하기
-      </Link>
+      </div>
     </div>
   );
 }
