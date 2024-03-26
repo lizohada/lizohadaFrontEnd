@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+일조하다 프론트는 [일조하다](https://d1tc8x3h1398ka.cloudfront.net)에 배포되어 있습니다.
+
 ## Available Scripts
 
 In the project directory, you can run:
