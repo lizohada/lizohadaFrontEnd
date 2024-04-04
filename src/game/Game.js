@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from "react";
-import ImageButton from "../components/ImageButton";
 import getQuery from "../apis/getQuery";
+import SelectOneQuery from "../components/SelectOneQuery";
+import { useNavigate } from "react-router-dom";
 
 export default function Game() {
   const [query, setQuery] = useState([]);
+  const [tastes, setTastes] = useState([]);
+  const [page, setPage] = useState(0);
+  const navigate = useNavigate();
+  // 페이지 번호 세팅
+  function handlePage() {
+    if (page < query.length - 1) {
+      setPage(page + 1);
+    } else {
+      navigate("/result", { state: { tastes: tastes } });
+    }
+  }
   // 클릭할 때마다 쿼리스트링에 배열 데이터를 추가하는 함수
-  function handleAddTaste(key) {
-    const params = new URLSearchParams();
-    params.set("key", key);
-    const queryString = params.toString();
-    window.history.pushState(null, "", `?${queryString}`);
+  function handleAddTaste(taste) {
+    setTastes([...tastes, taste]);
+    handlePage();
   }
 
   // 쿼리 데이터를 받아옵니다.
@@ -18,30 +28,12 @@ export default function Game() {
       setQuery(json.query);
     });
   }, []);
-  function CreateImgComponent(array) {
-    console.log(array.array);
-    array.array.map((element, index) => console.log(element));
-    return (
-      <>
-        {array.array.map((element, index) => (
-          <div className="max-w-24rem">
-            <ImageButton
-              handler={handleAddTaste}
-              keyword={element}
-              srcLink={"/logo.png"}
-            />
-            <div className="py-4 px-4" />
-          </div>
-        ))}
-      </>
-    );
-  }
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       {query.length === 0 ? (
         <div>질문지 받아오는 중</div>
       ) : (
-        <CreateImgComponent array={query[0]} />
+        <SelectOneQuery array={query[page]} handle={handleAddTaste} />
       )}
     </div>
   );
